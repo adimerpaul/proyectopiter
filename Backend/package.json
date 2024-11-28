@@ -1,0 +1,16 @@
+{
+  "name": "Express, route, mongodb demo",
+  "version": "1.0.0",
+  "description": "This demo app demonstrates the use of modules, routes and database operations using the Express.js framework",
+  "main": "app.js",
+  "author": "Nnamdi Nwanze",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

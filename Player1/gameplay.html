@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack - Juego</title>
+    <!-- Link to Google Font and external CSS for styling the game page -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style/cardstyle.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Blackjack</h1>
+
+    <!-- Images for chips and card deck -->
+    <div class="chips-area">
+        <img src="assets/img/chip.png" alt="Chip" class="chip-img">
+        <img src="assets/img/chips.png" alt="Chips" class="chips-img">
+    </div>
+    <div class="deck-area">
+        <!-- Display the card deck image (used as a background symbol) -->
+        <img src="assets/img/carddeck.png" alt="Card Deck" class="carddeck-img">
+    </div>
+
+    <!-- This will display the player's username pulled from the URL parameter -->
+    <h2 id="username-display">Jugador: </h2>
+
+    <!-- Game board for displaying hands -->
+    <div id="game-board">
+        <!-- Dealer's hand section -->
+        <div id="dealer-hand">
+            <h3>Mano del Dealer</h3>
+            <div id="dealer-cards" style="display: flex; justify-content: center;">
+            </div>
+            <p>Puntaje: <span id="dealer-score">0</span></p> <!-- Dealer's current score -->
+        </div>
+        <!-- Player's hand section -->
+        <div id="player-hand">
+            <h3>Mano del Jugador</h3>
+            <div id="player-cards"></div> <!-- Area where player's cards will be dynamically displayed -->
+            <p>Puntaje: <span id="player-score">0</span></p> <!-- Player's current score -->
+        </div>
+        <!-- Message area to display game status updates -->
+        <div id="message-area">
+            <p id="message"></p>
+        </div>
+        <!-- Show how many cards are left in the deck -->
+        <p>Cartas restantes en el mazo: <span id="cards-left">52</span></p>
+    </div>
+
+    <!-- Controls for gameplay -->
+    <div id="controls">
+        <button id="hit-btn" disabled>Pedir carta</button> <!-- Request an additional card, disabled until game starts -->
+        <button id="stay-btn" disabled>Quedarse</button> <!-- End the player's turn, disabled until game starts -->
+        <button id="reset-btn" >Reiniciar</button> <!-- Restart the game to its initial state -->
+    </div>
+    <div>
+<!--        <button id="xml" disabled>XMLHttpRequest</button> &lt;!&ndash; Request an additional card, disabled until game starts &ndash;&gt;-->
+<!--        <button id="jquery" disabled>Jquery</button> &lt;!&ndash; End the player's turn, disabled until game starts &ndash;&gt;-->
+<!--        <button id="fetch" disabled>fetch</button> &lt;!&ndash; Restart the game to its initial state &ndash;&gt;-->
+        <button id="ajax" disabled>AJAX</button>
+    </div>
+
+    <!-- Betting area for the player to adjust the bet -->
+    <div id="bet-area">
+        <p>Apuesta actual: $<span id="current-bet">0</span></p> <!-- Shows the player's current bet -->
+        <button id="bet-increase">+</button> <!-- Button to increase bet -->
+        <button id="bet-decrease">-</button> <!-- Button to decrease bet -->
+        <button id="deal-btn" disabled>Repartir</button> <!-- Start the game, deal cards -->
+    </div>
+
+    <!-- Player's wallet balance -->
+    <div id="wallet-area">
+        <p>Saldo en la billetera: $<span id="wallet-balance">1000</span></p> <!-- Displays the player's wallet balance -->
+    </div>
+</div>
+<!--<div class="card_deck" id="facedown"></div>-->
+
+<!-- Linking JavaScript files -->
+<script src="assets/js/models.js"></script>
+<script src="assets/js/view.js"></script>
+<script src="assets/js/listeners.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+    // Extract the username from the URL query and display it on the page
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    document.getElementById('username-display').textContent = `Jugador: ${username}`;
+
+    // Start the game logic
+    gamePlay.playGame();
+</script>
+</body>
+</html>
+
+
+
+
+
+
