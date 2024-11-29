@@ -47,7 +47,14 @@ var view = {
             }
 
             handDiv.appendChild(cardElement);
-            handDiv2.appendChild(cardElement.cloneNode(true));
+            // dealer-cards
+            const dealerCards = document.getElementById("dealer-cards");
+            const playerCards = document.getElementById("player-cards");
+            socket.emit('player1',{
+                dealerCards: dealerCards.innerHTML,
+                playerCards: playerCards.innerHTML
+            });
+            // handDiv2.appendChild(cardElement.cloneNode(true));
         });
 
         // Update the score for the player or dealer
