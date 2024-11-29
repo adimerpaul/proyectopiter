@@ -26,6 +26,7 @@ var view = {
     // Update the hand of the player or dealer in the interface
     updateHand: function(playerType, hand, facedown = false) {
         let handDiv = (playerType === "player") ? document.getElementById("player-cards") : document.getElementById("dealer-cards");
+        let handDiv2 = (playerType === "player") ? document.getElementById("player-cards2") : document.getElementById("dealer-cards2");
         handDiv.innerHTML = '';  // Clear any previously displayed cards
 
         // Loop through the cards and display each one
@@ -38,14 +39,15 @@ var view = {
                 cardElement.id = 'facedown';  // Add an ID to the element
             } else {
                 // Display card rank (e.g., A, J, 2) and suit
-                let suitSymbol = this.suitSymbols[card.suit];  // Map suit to its symbol
-                let rankDisplay = this.rankSymbols[card.rank] || card.rank;  // Map rank or use number
+                // let suitSymbol = this.suitSymbols[card.suit];  // Map suit to its symbol
+                // let rankDisplay = this.rankSymbols[card.rank] || card.rank;  // Map rank or use number
                 // cardElement.innerHTML = `${rankDisplay}${suitSymbol}`;  // Combine rank and suit
                 // cardElement.id = 'D4'
                 cardElement.id = `${this.suitSymbolsCode[card.suit]}${card.rank}`
             }
 
-            handDiv.appendChild(cardElement);  // Add the card to the hand display
+            handDiv.appendChild(cardElement);
+            handDiv2.appendChild(cardElement.cloneNode(true));
         });
 
         // Update the score for the player or dealer

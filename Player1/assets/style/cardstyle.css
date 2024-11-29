@@ -1,4 +1,7 @@
 /* Applying a global font style to ensure consistency across the entire page */
+*{
+    background: #4CAF50;
+}
 body {
     font-family: 'Roboto', sans-serif; /* A clean, readable font for all text */
     text-align: center; /* Center-align text, helpful for a UI that is focused */
@@ -9,7 +12,7 @@ body {
 
 /* The main container for content, pushing elements slightly down from the top */
 .container {
-    margin-top: 50px; /* Creates space between the top of the page and the content */
+    /*margin-top: 50px; !* Creates space between the top of the page and the content *!*/
 }
 
 /* Applying uniform styling to input fields and buttons for consistency */
@@ -195,3 +198,9 @@ button:disabled {
     cursor: not-allowed;
 }
 
+#player2-board {
+    width: 350px;
+    margin: 5px;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
