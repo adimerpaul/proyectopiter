@@ -36,10 +36,17 @@ router.post('/username', function (req, res) {
     // Verificar si el usuario ya existe en la base de datos
     mydb.findRec({ username: username }, function (result) {
         if (result) {
-            res.status(409).send("Username already exists");
+            // res.status(409).send("Username already exists");
+            // returnar usuario
+            res.status(200).json(result);
         } else {
             // Si no existe, insertar el nombre de usuario
-            mydb.insertRec({ username: username }, function () {
+            mydb.insertRec({
+                username: username,
+                amount: 1000,
+                status: "",
+                count: 0
+            }, function () {
                 res.status(201).send("Username added successfully");
             })
         }

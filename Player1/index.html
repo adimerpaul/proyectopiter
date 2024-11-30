@@ -4,27 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack - Inicio</title>
-  <!-- Link to Google Font for better typography -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Link to the external CSS file for styles -->
   <link rel="stylesheet" href="assets/style/cardstyle.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container">
   <h1>Bienvenido a Blackjack</h1>
   <p>Introduce tu nombre de usuario para comenzar a jugar:</p>
-  <!-- Form with GET request to pass the username to the gameplay page -->
-  <form action="gameplay.html" method="GET">
-    <!-- Input field for the user to enter their name, required ensures the form won't submit if it's empty -->
+  <form id="usernameForm">
     <label for="username">Nombre de usuario:</label>
     <input type="text" id="username" name="username" required>
-    <!-- Button to start the game after the username is entered -->
     <button type="submit">Comenzar Juego</button>
   </form>
+  <p id="message" style="color: red;"></p>
 </div>
+
+<script>
+  $(document).ready(function () {
+    // Capturar el evento de envío del formulario
+    $('#usernameForm').on('submit', function (event) {
+      event.preventDefault(); // Prevenir la acción por defecto del formulario
+
+      const username = $('#username').val(); // Obtener el valor del campo username
+
+      const url= 'http://127.0.0.1:3000/username';
+      $.ajax({
+        url: url,
+        method: 'POST',
+        contentType: 'application/json', // Tipo de contenido enviado
+        data: JSON.stringify({ username: username }), // Datos enviados al servidor
+        success: function (response) {
+          // Si la respuesta es exitosa, redirigir a la página del juego
+          window.location.href = `gameplay.html?username=${encodeURIComponent(username)}`;
+        },
+        error: function (xhr) {
+          // Manejar errores según el estado de la respuesta
+          if (xhr.status === 409) {
+            $('#message').text('El nombre de usuario ya existe.');
+          } else if (xhr.status === 400) {
+            $('#message').text('Se requiere un nombre de usuario.');
+          } else {
+            $('#message').text('Ocurrió un error. Inténtalo de nuevo.');
+          }
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
-
-
-
-
