@@ -62,48 +62,26 @@ router.get('/username', function (req, res) {
 });
 
 router.get('/player1', function (req, res) {
-    const username = req.query.username;
-    const roundStatus = req.query.roundStatus;
-    const walletAmount = parseInt(req.query.walletAmount, 10);
-
-    if (!username || !roundStatus || isNaN(walletAmount)) {
-        res.status(400).send("Missing required parameters: username, roundStatus, or walletAmount");
-        return;
-    }
-
-    // Lleva el registro del número de rondas jugadas
-    let roundsPlayed = parseInt(req.query.roundsPlayed, 10) || 0;
-
-    if (roundStatus === "gameover") {
-        // Verificar si el usuario existe en la base de datos
-        mydb.findRec({ username: username }, function (existingUser) {
-            if (!existingUser) {
-                // Si no existe, agregarlo con los datos iniciales
-                const newUser = { username: username, score: roundsPlayed };
-                mydb.insertRec(newUser, function () {
-                    res.status(201).send("New user added and score recorded");
-                });
-            } else {
-                existingUser.score= (existingUser.score === undefined ? 0 : existingUser.score);
-                // console.log(existingUser.score);
-                // Si existe, verificar si la nueva puntuación es mejor
-                if (roundsPlayed > existingUser.score) {
-                    mydb.updateData(
-                        { username: username },
-                        { score: roundsPlayed },
-                        function () {
-                            res.status(200).send("Score updated with better score");
-                        }
-                    );
-                } else {
-                    res.status(200).send("Game over, but score not improved");
-                }
-            }
-        });
-    } else {
-        // Continuar con la partida
-        res.status(200).send("Round in progress for Player 1");
-    }
+    mydb.findRec({ username: 'player1' }, function (result) {
+        const user = result;
+        const status = req.query.status;
+        if (status==="get") {
+            res.status(200).json(user);
+        } else if (status==="post") {
+            const newAmount = req.query.amount;
+            const status = req.query.status;
+            const count = user.count + 1;
+            mydb.updateData({ username: 'player1' }, {
+                amount: newAmount,
+                status: status,
+                count: count
+            }, function () {
+                res.status(200).json({ amount: newAmount });
+            });
+        } else {
+            res.status(400).send("Invalid status");
+        }
+    });
 });
 
 router.get('/player2', function (req, res) {
