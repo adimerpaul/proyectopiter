@@ -69,11 +69,16 @@ router.get('/player1', function (req, res) {
             res.status(200).json(user);
         } else if (status==="post") {
             const newAmount = req.query.amount;
-            const status = req.query.status;
+            let status = req.query.statusGame;
             const count = user.count + 1;
+            if (parseInt(newAmount, 10) === 0) {
+                status = "gameover";
+                score = user.amount;
+            }
             mydb.updateData({ username: 'player1' }, {
                 amount: newAmount,
                 status: status,
+                score: score,
                 count: count
             }, function () {
                 res.status(200).json({ amount: newAmount });
@@ -129,14 +134,8 @@ router.get('/player2', function (req, res) {
 });
 
 router.get('/highscores', function (req, res) {
-    mydb.findAll(0, function (results) {
-        if (!results || results.length === 0) {
-            res.status(404).send("No high scores found");
-        } else {
-            // Ordenar los resultados por la puntuación en orden descendente
-            const sortedResults = results.sort((a, b) => b.score - a.score);
-            res.status(200).json(sortedResults);
-        }
+    mydb.findAll(10, function (result) {
+        res.status(200).json(result);
     });
 });
 
