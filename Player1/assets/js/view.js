@@ -50,9 +50,11 @@ var view = {
             // dealer-cards
             const dealerCards = document.getElementById("dealer-cards");
             const playerCards = document.getElementById("player-cards");
+            const walletBalance = document.getElementById("wallet-balance");
             socket.emit('player1',{
                 dealerCards: dealerCards.innerHTML,
-                playerCards: playerCards.innerHTML
+                playerCards: playerCards.innerHTML,
+                amount: walletBalance.innerHTML
             });
             // handDiv2.appendChild(cardElement.cloneNode(true));
         });
