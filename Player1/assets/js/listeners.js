@@ -208,9 +208,9 @@ document.getElementById("bet-decrease").addEventListener("click", function() {
 // document.getElementById("fetch").addEventListener("click", function() {
 //     gamePlay.Blackjack.getRemoteAdvice("fetch");
 // })
-document.getElementById("ajax").addEventListener("click", function() {
-    gamePlay.Blackjack.getRemoteAdvice("ajax");
-})
+// document.getElementById("ajax").addEventListener("click", function() {
+//     gamePlay.Blackjack.getRemoteAdvice("ajax");
+// })
 
 
 

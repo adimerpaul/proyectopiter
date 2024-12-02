@@ -45,7 +45,8 @@ router.post('/username', function (req, res) {
                 username: username,
                 amount: 1000,
                 status: "",
-                count: 0
+                count: 0,
+                score: 0
             }, function () {
                 res.status(201).send("Username added successfully");
             })
@@ -135,7 +136,9 @@ router.get('/player2', function (req, res) {
 
 router.get('/highscores', function (req, res) {
     mydb.findAll(10, function (result) {
-        res.status(200).json(result);
+        const sortedResult = result.sort((a, b) => Number(b.score) - Number(a.score));
+
+        res.status(200).json(sortedResult);
     });
 });
 

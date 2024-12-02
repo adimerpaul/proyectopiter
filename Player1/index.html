@@ -18,39 +18,19 @@
     <button type="submit">Comenzar Juego</button>
   </form>
   <p id="message" style="color: red;"></p>
+  <h2>Tabla de Puntuaciones Altas</h2>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Posición</th>
+      <th>Nombre de Usuario</th>
+      <th>Puntuación</th>
+    </tr>
+    </thead>
+    <tbody id="scoreTable">
+    </tbody>
+  </table>
 </div>
-
-<script>
-  $(document).ready(function () {
-    // Capturar el evento de envío del formulario
-    $('#usernameForm').on('submit', function (event) {
-      event.preventDefault(); // Prevenir la acción por defecto del formulario
-
-      const username = $('#username').val(); // Obtener el valor del campo username
-
-      const url= 'http://127.0.0.1:3000/username';
-      $.ajax({
-        url: url,
-        method: 'POST',
-        contentType: 'application/json', // Tipo de contenido enviado
-        data: JSON.stringify({ username: username }), // Datos enviados al servidor
-        success: function (response) {
-          // Si la respuesta es exitosa, redirigir a la página del juego
-          window.location.href = `gameplay.html?username=${encodeURIComponent(username)}`;
-        },
-        error: function (xhr) {
-          // Manejar errores según el estado de la respuesta
-          if (xhr.status === 409) {
-            $('#message').text('El nombre de usuario ya existe.');
-          } else if (xhr.status === 400) {
-            $('#message').text('Se requiere un nombre de usuario.');
-          } else {
-            $('#message').text('Ocurrió un error. Inténtalo de nuevo.');
-          }
-        }
-      });
-    });
-  });
-</script>
+<script src="assets/js/highscores.js"></script>
 </body>
 </html>
