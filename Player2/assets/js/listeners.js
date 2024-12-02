@@ -23,7 +23,7 @@ document.getElementById("deal-btn").addEventListener("click", function() {
     // document.getElementById("xml").disabled = false;
     // document.getElementById("jquery").disabled = false;
     // document.getElementById("fetch").disabled = false;
-    document.getElementById("ajax").disabled = false;
+    // document.getElementById("ajax").disabled = false;
 });
 
 // Listener for the "Pedir carta" (Hit) button

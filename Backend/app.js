@@ -21,26 +21,14 @@ app.use('/', routes);
 
 // var users = 0;
 io.on('connection', function (socket) {
-
     socket.on('player1', function (data) {
-        console.log(data);
+        // console.log(data);
         io.sockets.emit('player1', data);
     });
-
-    //increment number of users
-    // users++;
-    // //broadcast number of users when users connect
-    // io.sockets.emit('broadcast', {description: users + ' users are here!'});
-    // //listen for and broadcast clicks
-    // socket.on('clicks', function(clicks){
-    //     console.log("clicked "+clicks+" times");
-    //     io.sockets.emit('clicked', {data: clicks});
-    // });
-    // //broadcast number of users when users disconnect
-    // socket.on('disconnect', function () {
-    //     users--;
-    //     io.sockets.emit('broadcast', {description: users + ' users  are here!'});
-    // });
+    socket.on('player2', function (data) {
+        // console.log(data);
+        io.sockets.emit('player2', data);
+    });
 });
 http.listen(3000, function () {
     console.log('listening on http://127.0.0.1:3000');

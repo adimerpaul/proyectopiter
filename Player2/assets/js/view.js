@@ -50,7 +50,7 @@ var view = {
             // dealer-cards
             const dealerCards = document.getElementById("dealer-cards");
             const playerCards = document.getElementById("player-cards");
-            socket.emit('player1',{
+            socket.emit('player2',{
                 dealerCards: dealerCards.innerHTML,
                 playerCards: playerCards.innerHTML
             });

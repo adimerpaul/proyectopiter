@@ -21,7 +21,7 @@ var socket = io(myURL, {secure: true});
 // 	showNumberOfPlayers(data.description);
 // });
 //show button was clicked
-socket.on('player1', function (data) {
+socket.on('player2', function (data) {
     const dealerCards = document.getElementById("dealer-cards2");
     const playerCards = document.getElementById("player-cards2");
     dealerCards.innerHTML = data.dealerCards;
