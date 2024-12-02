@@ -4,27 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack - Inicio</title>
-  <!-- Link to Google Font for better typography -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Link to the external CSS file for styles -->
   <link rel="stylesheet" href="assets/style/cardstyle.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container">
   <h1>Bienvenido a Blackjack</h1>
   <p>Introduce tu nombre de usuario para comenzar a jugar:</p>
-  <!-- Form with GET request to pass the username to the gameplay page -->
-  <form action="gameplay.html" method="GET">
-    <!-- Input field for the user to enter their name, required ensures the form won't submit if it's empty -->
+  <form id="usernameForm">
     <label for="username">Nombre de usuario:</label>
     <input type="text" id="username" name="username" required>
-    <!-- Button to start the game after the username is entered -->
     <button type="submit">Comenzar Juego</button>
   </form>
+  <p id="message" style="color: red;"></p>
+  <h2>Tabla de Puntuaciones Altas</h2>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Posición</th>
+      <th>Nombre de Usuario</th>
+      <th>Puntuación</th>
+    </tr>
+    </thead>
+    <tbody id="scoreTable">
+    </tbody>
+  </table>
 </div>
+<script src="assets/js/highscores.js"></script>
 </body>
 </html>
-
-
-
-

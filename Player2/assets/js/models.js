@@ -127,9 +127,20 @@ var user = {
 
     // Initialize the user by resetting hand, setting wallet balance, and setting default bet
     initialize: function() {
+
         this.userhand.reset();
-        this.userWallet.setValue(1000);  // Player starts with $1000
+        // this.userWallet.setValue(1000);  // Player starts with $1000
         this.userBet = 0;  // Initial bet
+        const url = 'http://127.0.0.1:3000/player1?status=get';
+        const cm = this;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+                const walletBalance = document.getElementById("wallet-balance");
+                walletBalance.innerHTML = data.amount;
+            }
+        })
     },
 
     // Set the player's current bet

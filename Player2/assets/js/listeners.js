@@ -77,67 +77,63 @@ document.getElementById("stay-btn").addEventListener("click", function() {
     playerScore = parseInt(playerScore);
     dealerScore2 = parseInt(dealerScore2);
     if (dealerScore2 > 21) {
-        // const url= 'http://127.0.0.1:3000/?outcome=lost';
-        // $.ajax({
-        //     url: url,
-        //     type: 'GET',
-        //     success: function(data) {
-        //         console.log(data);
-        //         const wins = data.content.wins;
-        //         const losses = data.content.losses;
-        //         const pushes = data.content.pushes;
-        //         view.addMessage("¡Perdiste! "+ "Wins: " + wins + " Losses: " + losses + " Pushes: " + pushes);
-        //     }
-        // });
         walletBalance = parseInt(walletBalance) + parseInt(currentBet);
         document.getElementById("wallet-balance").innerHTML = walletBalance;
-        view.addMessage("¡Ganaste!!");  // Inform player they've won
+        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=won';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                view.addMessage("¡Ganaste!!");  // Inform player they've won
+            }
+        });
+        // walletBalance = parseInt(walletBalance) + parseInt(currentBet);
+        // document.getElementById("wallet-balance").innerHTML = walletBalance;
+        // view.addMessage("¡Ganaste!!");  // Inform player they've won
     }else if (playerScore > dealerScore2) {
-        // const url= 'http://127.0.0.1:3000/?outcome=won';
-        // $.ajax({
-        //     url: url,
-        //     type: 'GET',
-        //     success: function(data) {
-        //         console.log(data);
-        //         const wins = data.content.wins;
-        //         const losses = data.content.losses;
-        //         const pushes = data.content.pushes;
-        //         view.addMessage("¡Ganaste! "+ "Wins: " + wins + " Losses: " + losses + " Pushes: " + pushes);
-        //     }
-        // });
         walletBalance = parseInt(walletBalance) + parseInt(currentBet);
         document.getElementById("wallet-balance").innerHTML = walletBalance;
-        view.addMessage("¡Ganaste!");  // Inform player they've won
+        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=won';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                view.addMessage("¡Ganaste!!");  // Inform player they've won
+            }
+        });
+        // walletBalance = parseInt(walletBalance) + parseInt(currentBet);
+        // document.getElementById("wallet-balance").innerHTML = walletBalance;
+        // view.addMessage("¡Ganaste!");  // Inform player they've won
     } else if (playerScore < dealerScore2) {
-        // const url= 'http://127.0.0.1:3000/?outcome=lost';
-        // $.ajax({
-        //     url: url,
-        //     type: 'GET',
-        //     success: function(data) {
-        //         console.log(data);
-        //         const wins = data.content.wins;
-        //         const losses = data.content.losses;
-        //         const pushes = data.content.pushes;
-        //         view.addMessage("¡Perdiste! "+ "Wins: " + wins + " Losses: " + losses + " Pushes: " + pushes);
-        //     }
-        // });
         walletBalance = parseInt(walletBalance) - parseInt(currentBet);
         document.getElementById("wallet-balance").innerHTML = walletBalance;
-        view.addMessage("¡Perdiste!");  // Inform player they've lost
+        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=lost';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                view.addMessage("¡Perdiste!");  // Inform player they've lost
+            }
+        });
+        // walletBalance = parseInt(walletBalance) - parseInt(currentBet);
+        // document.getElementById("wallet-balance").innerHTML = walletBalance;
+        // view.addMessage("¡Perdiste!");  // Inform player they've lost
     } else {
-        // const url= 'http://127.0.0.1:3000/?outcome=push';
-        // $.ajax({
-        //     url: url,
-        //     type: 'GET',
-        //     success: function(data) {
-        //         console.log(data);
-        //         const wins = data.content.wins;
-        //         const losses = data.content.losses;
-        //         const pushes = data.content.pushes;
-        //         view.addMessage("¡Empate! "+ "Wins: " + wins + " Losses: " + losses + " Pushes: " + pushes);
-        //     }
-        // });
-        view.addMessage("¡Empate!");  // Inform player of
+        // walletBalance = parseInt(walletBalance) + parseInt(currentBet);
+        // document.getElementById("wallet-balance").innerHTML = walletBalance;
+        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=push';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                view.addMessage("¡Empate!");  // Inform player of
+            }
+        });
+        // view.addMessage("¡Empate!");  // Inform player of
     }
     document.getElementById("current-bet").innerHTML = 0;
 });
@@ -156,6 +152,16 @@ document.getElementById("reset-btn").addEventListener("click", function() {
     document.getElementById("deal-btn").disabled = false;
     document.getElementById("bet-increase").disabled = false;
     document.getElementById("bet-decrease").disabled = false;
+
+    const url= 'http://127.0.0.1:3000/player1?status=post&amount='+0+'&statusGame=gameover';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(data) {
+            console.log(data);
+            view.addMessage("¡Juego reiniciado!");
+        }
+    });
 });
 
 // Listener for the "Incrementar apuesta" (Increase Bet) button
@@ -202,9 +208,9 @@ document.getElementById("bet-decrease").addEventListener("click", function() {
 // document.getElementById("fetch").addEventListener("click", function() {
 //     gamePlay.Blackjack.getRemoteAdvice("fetch");
 // })
-document.getElementById("ajax").addEventListener("click", function() {
-    gamePlay.Blackjack.getRemoteAdvice("ajax");
-})
+// document.getElementById("ajax").addEventListener("click", function() {
+//     gamePlay.Blackjack.getRemoteAdvice("ajax");
+// })
 
 
 
