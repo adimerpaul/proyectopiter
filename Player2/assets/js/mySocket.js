@@ -23,6 +23,8 @@ var socket = io(myURL, {secure: true});
 //show button was clicked
 socket.on('player1', function (data) {
     console.log(data);
+
+    const visibleDealerCard = data.visibleDealerCard;
     const dealerCards = document.getElementById("dealer-cards2");
     const playerCards = document.getElementById("player-cards2");
     const playerScore = document.getElementById("player-score2");
@@ -34,6 +36,11 @@ socket.on('player1', function (data) {
     playerCards.innerHTML = data.playerCards;
     playerScore.innerHTML = data.playerScore;
     dealerScore.innerHTML = data.dealerScore;
+    if (visibleDealerCard) {
+        dealerScore.style.display = "block";
+    }else {
+        dealerScore.style.display = "none";
+    }
     amount.innerHTML = data.amount;
     // score.innerHTML = data.score;
 });
