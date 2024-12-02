@@ -22,9 +22,19 @@ var socket = io(myURL, {secure: true});
 // });
 //show button was clicked
 socket.on('player1', function (data) {
+    console.log(data);
     const dealerCards = document.getElementById("dealer-cards2");
     const playerCards = document.getElementById("player-cards2");
+    const playerScore = document.getElementById("player-score2");
+    const dealerScore = document.getElementById("dealer-score2");
+    const amount = document.getElementById("monto2");
+    // const score = document.getElementById("score2");
+
     dealerCards.innerHTML = data.dealerCards;
     playerCards.innerHTML = data.playerCards;
+    playerScore.innerHTML = data.playerScore;
+    dealerScore.innerHTML = data.dealerScore;
+    amount.innerHTML = data.amount;
+    // score.innerHTML = data.score;
 });
 

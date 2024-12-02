@@ -51,10 +51,16 @@ var view = {
             const dealerCards = document.getElementById("dealer-cards");
             const playerCards = document.getElementById("player-cards");
             const walletBalance = document.getElementById("wallet-balance");
+            // const score = document.getElementById("score");
+            const playerScore = document.getElementById("player-score");
+            const dealerScore = document.getElementById("dealer-score");
             socket.emit('player1',{
                 dealerCards: dealerCards.innerHTML,
                 playerCards: playerCards.innerHTML,
-                amount: walletBalance.innerHTML
+                amount: walletBalance.innerHTML,
+                // score: score.innerHTML,
+                playerScore: playerScore.innerHTML,
+                dealerScore: dealerScore.innerHTML
             });
             // handDiv2.appendChild(cardElement.cloneNode(true));
         });

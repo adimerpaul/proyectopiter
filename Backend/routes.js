@@ -72,6 +72,7 @@ router.get('/player1', function (req, res) {
             const newAmount = req.query.amount;
             let status = req.query.statusGame;
             const count = user.count + 1;
+            score = user.score;
             if (parseInt(newAmount, 10) === 0) {
                 status = "gameover";
                 score = user.amount;

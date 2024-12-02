@@ -138,7 +138,9 @@ var user = {
             type: 'GET',
             success: function(data) {
                 const walletBalance = document.getElementById("wallet-balance");
+                const score = document.getElementById("score");
                 walletBalance.innerHTML = data.amount;
+                score.innerHTML = data.score;
             }
         })
     },
