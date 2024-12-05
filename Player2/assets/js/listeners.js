@@ -76,10 +76,12 @@ document.getElementById("stay-btn").addEventListener("click", function() {
     currentBet = parseInt(currentBet);
     playerScore = parseInt(playerScore);
     dealerScore2 = parseInt(dealerScore2);
+    const userName = document.getElementById("username-display");
+    const username = userName.innerHTML.split(' ');
     if (dealerScore2 > 21) {
         walletBalance = parseInt(walletBalance) + parseInt(currentBet);
         document.getElementById("wallet-balance").innerHTML = walletBalance;
-        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=won';
+        const url= 'http://127.0.0.1:3000/player2?status=post&amount='+walletBalance+'&statusGame=won&username='+username[1];
         $.ajax({
             url: url,
             type: 'GET',
@@ -94,7 +96,7 @@ document.getElementById("stay-btn").addEventListener("click", function() {
     }else if (playerScore > dealerScore2) {
         walletBalance = parseInt(walletBalance) + parseInt(currentBet);
         document.getElementById("wallet-balance").innerHTML = walletBalance;
-        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=won';
+        const url= 'http://127.0.0.1:3000/player2?status=post&amount='+walletBalance+'&statusGame=won&username='+username[1];
         $.ajax({
             url: url,
             type: 'GET',
@@ -109,7 +111,7 @@ document.getElementById("stay-btn").addEventListener("click", function() {
     } else if (playerScore < dealerScore2) {
         walletBalance = parseInt(walletBalance) - parseInt(currentBet);
         document.getElementById("wallet-balance").innerHTML = walletBalance;
-        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=lost';
+        const url= 'http://127.0.0.1:3000/player2?status=post&amount='+walletBalance+'&statusGame=lost&username='+username[1];
         $.ajax({
             url: url,
             type: 'GET',
@@ -124,7 +126,7 @@ document.getElementById("stay-btn").addEventListener("click", function() {
     } else {
         // walletBalance = parseInt(walletBalance) + parseInt(currentBet);
         // document.getElementById("wallet-balance").innerHTML = walletBalance;
-        const url= 'http://127.0.0.1:3000/player1?status=post&amount='+walletBalance+'&statusGame=push';
+        const url= 'http://127.0.0.1:3000/player2?status=post&amount='+walletBalance+'&statusGame=push&username='+username[1];
         $.ajax({
             url: url,
             type: 'GET',
@@ -153,7 +155,10 @@ document.getElementById("reset-btn").addEventListener("click", function() {
     document.getElementById("bet-increase").disabled = false;
     document.getElementById("bet-decrease").disabled = false;
 
-    const url= 'http://127.0.0.1:3000/player1?status=post&amount='+0+'&statusGame=gameover';
+    const userName = document.getElementById("username-display");
+    const username = userName.innerHTML.split(' ');
+
+    const url= 'http://127.0.0.1:3000/player2?status=post&amount='+0+'&statusGame=gameover&username='+username[1];
     $.ajax({
         url: url,
         type: 'GET',
@@ -162,6 +167,20 @@ document.getElementById("reset-btn").addEventListener("click", function() {
             view.addMessage("¡Juego reiniciado!");
         }
     });
+});
+document.getElementById("reset-btn2").addEventListener("click", function() {
+    // gamePlay.reset();  // Reset the game to its initial state
+    view.clearMessages();  // Clear any messages from the previous round
+    // view.updateWallet(gamePlay.Blackjack.player.userWallet.getValue());  // Update wallet display
+    const playerCards = document.getElementById("player-cards");
+    playerCards.innerHTML = '';
+    const dealerCards = document.getElementById("dealer-cards");
+    dealerCards.innerHTML = '';
+    document.getElementById("deal-btn").disabled = false;
+    document.getElementById("bet-increase").disabled = false;
+    document.getElementById("bet-decrease").disabled = false;
+    const userName = document.getElementById("username-display");
+    const username = userName.innerHTML.split(' ');
 });
 
 // Listener for the "Incrementar apuesta" (Increase Bet) button
