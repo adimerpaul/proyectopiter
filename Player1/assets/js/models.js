@@ -131,7 +131,9 @@ var user = {
         this.userhand.reset();
         // this.userWallet.setValue(1000);  // Player starts with $1000
         this.userBet = 0;  // Initial bet
-        const url = 'http://127.0.0.1:3000/player1?status=get';
+        const userName = document.getElementById("username-display");
+        const username = userName.innerHTML.split(' ');
+        const url = 'http://127.0.0.1:3000/player1?status=get&username=' + username[1];
         const cm = this;
         $.ajax({
             url: url,

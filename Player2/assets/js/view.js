@@ -25,6 +25,9 @@ var view = {
 
     // Update the hand of the player or dealer in the interface
     updateHand: function(playerType, hand, facedown = false) {
+        let scoreElement = (playerType === "player") ? document.getElementById("player-score") : document.getElementById("dealer-score"); // Determine which score element to update based on the playerType ("player" or "dealer")
+        scoreElement.textContent = hand.getScore();  // Display the current score
+
         let handDiv = (playerType === "player") ? document.getElementById("player-cards") : document.getElementById("dealer-cards");
         let handDiv2 = (playerType === "player") ? document.getElementById("player-cards2") : document.getElementById("dealer-cards2");
         handDiv.innerHTML = '';  // Clear any previously displayed cards
@@ -50,16 +53,24 @@ var view = {
             // dealer-cards
             const dealerCards = document.getElementById("dealer-cards");
             const playerCards = document.getElementById("player-cards");
+            const walletBalance = document.getElementById("wallet-balance");
+            // const score = document.getElementById("score");
+            const playerScore = document.getElementById("player-score");
+            const dealerScore = document.getElementById("dealer-score");
             socket.emit('player2',{
                 dealerCards: dealerCards.innerHTML,
-                playerCards: playerCards.innerHTML
+                playerCards: playerCards.innerHTML,
+                amount: walletBalance.innerHTML,
+                // score: score.innerHTML,
+                playerScore: playerScore.innerHTML,
+                dealerScore: dealerScore.innerHTML,
+                visibleDealerCard: dealerScore.style.display === "none" ? false : true
             });
             // handDiv2.appendChild(cardElement.cloneNode(true));
         });
 
         // Update the score for the player or dealer
-        let scoreElement = (playerType === "player") ? document.getElementById("player-score") : document.getElementById("dealer-score"); // Determine which score element to update based on the playerType ("player" or "dealer")
-        scoreElement.textContent = hand.getScore();  // Display the current score
+
     },
 
     // Display a message in the game, such as status updates or results

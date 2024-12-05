@@ -63,7 +63,8 @@ router.get('/username', function (req, res) {
 });
 
 router.get('/player1', function (req, res) {
-    mydb.findRec({ username: 'player1' }, function (result) {
+    const username = req.query.username;
+    mydb.findRec({ username: username }, function (result) {
         const user = result;
         const status = req.query.status;
         if (status==="get") {
@@ -77,7 +78,7 @@ router.get('/player1', function (req, res) {
                 status = "gameover";
                 score = user.amount;
             }
-            mydb.updateData({ username: 'player1' }, {
+            mydb.updateData({ username: username }, {
                 amount: newAmount,
                 status: status,
                 score: score,

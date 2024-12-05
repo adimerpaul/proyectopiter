@@ -13,10 +13,19 @@
 <div class="container">
     <h1>Blackjack</h1>
 <!--    floating-->
-    <div id="player2-board" style="position: absolute; top: 0; left: 0;">
-        <div>Player 2 board</div>
+    <div id="player2-board" style="position: absolute; top: 850px; left: 0;">
+        <div>Player 1 board</div>
         <div id="dealer-cards2"></div>
+        <div>
+            delerscore: <span id="dealer-score2">0</span>
+        </div>
         <div id="player-cards2"></div>
+        <div>
+            playerscore: <span id="player-score2"> 0</span>
+        </div>
+        <div>
+            Wealt amount<span id="monto2">0</span>
+        </div>
     </div>
 
     <!-- Images for chips and card deck -->
@@ -57,9 +66,10 @@
 
     <!-- Controls for gameplay -->
     <div id="controls">
-        <button id="hit-btn" disabled>Pedir carta</button> <!-- Request an additional card, disabled until game starts -->
-        <button id="stay-btn" disabled>Quedarse</button> <!-- End the player's turn, disabled until game starts -->
-        <button id="reset-btn" >Reiniciar</button> <!-- Restart the game to its initial state -->
+        <button id="hit-btn" disabled>Hit</button> <!-- Request an additional card, disabled until game starts -->
+        <button id="stay-btn" disabled>Stay</button> <!-- End the player's turn, disabled until game starts -->
+        <button id="reset-btn2" >Restart</button>
+        <button id="reset-btn" >Gameover</button>
     </div>
     <div>
 <!--        <button id="xml" disabled>XMLHttpRequest</button> &lt;!&ndash; Request an additional card, disabled until game starts &ndash;&gt;-->
